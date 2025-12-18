@@ -68,7 +68,7 @@ A correlation heatmap uses the Pearson Correlation Coefficient ($r$) to measure 
 
 ## The Left Graph: Raw Data Distribution
 
-This represents the TotalCharges column exactly as it appears in the IBM dataset.
+This represents the TotalCharges column exactly as it appears in the dataset.
 
 •	The Shape (Positive Skew): Notice how the bars are tallest on the left and trail off to the right. In statistics, this is called Positive Skew or Right-Skewed data. It tells us that the majority of customers have relatively low total charges (under $2,000), while only a few "high-value" customers have spent upwards of $8,000.
 
@@ -185,7 +185,8 @@ The deep learning model used in this study is a fully connected Multilayer Perce
 
 ## Comparative Model Performance
 
-<img width="975" height="430" alt="image" src="https://github.com/user-attachments/assets/b826a0d8-6932-49d2-9b73-a958ef36eeef" />
+<img width="531" height="229" alt="image" src="https://github.com/user-attachments/assets/d1d486c2-ed0a-4cb1-b5ed-b37ba4b63d1b" />
+
 
 
 1. Performance Summary Table
