@@ -8,7 +8,7 @@ This project focuses on the development and comparative evaluation of machine le
 
 In our project, features are automatically categorized by the pipeline into numerical and categorical types.
 
-Raw Input Features
+### Raw Input Features
 
 The model uses data from the IBM Telco Customer Churn dataset, excluding the customerID and the target Churn.
 
@@ -16,7 +16,7 @@ The model uses data from the IBM Telco Customer Churn dataset, excluding the cus
 
 •	Categorical Features: gender, SeniorCitizen, Partner, Dependents, PhoneService, MultipleLines, InternetService, OnlineSecurity, OnlineBackup, DeviceProtection, TechSupport, StreamingTV, StreamingMovies, Contract, PaperlessBilling, and PaymentMethod.
 
-Processed Feature Count
+### Processed Feature Count
 
 While the raw dataset has 19 features, the OneHotEncoder expands categorical variables into multiple binary columns.
 
@@ -24,7 +24,7 @@ While the raw dataset has 19 features, the OneHotEncoder expands categorical var
 
 •	Total Model Input: After this preprocessing, the number of features increases significantly. Based on standard encoding for this dataset, your num_features variable (used by the MLP) is typically around 45 to 50 features.
 
-Feature Distribution Curves (KDE)
+### Feature Distribution Curves (KDE)
 
 The added graph uses Kernel Density Estimation (KDE) to visualize how the data is spread:
 
@@ -37,11 +37,11 @@ The added graph uses Kernel Density Estimation (KDE) to visualize how the data i
 <img width="1285" height="349" alt="image" src="https://github.com/user-attachments/assets/61626330-12c9-4974-879d-3e6a2ab00133" />
 
 
-Correlation Heatmap
+## Correlation Heatmap
 
 <img width="975" height="763" alt="image" src="https://github.com/user-attachments/assets/4ccf8405-e608-4b64-a8c6-2c443d845a45" />
 
-What is a Correlation Heatmap?
+### What is a Correlation Heatmap?
 
 A correlation heatmap uses the Pearson Correlation Coefficient ($r$) to measure the strength of a linear relationship between two variables. The values range from -1 to +1.
 
@@ -57,7 +57,7 @@ A correlation heatmap uses the Pearson Correlation Coefficient ($r$) to measure 
 
 • Total Charges vs. Tenure (High Positive Correlation): Usually around +0.83. This is expected (collinearity). The longer a customer stays, the more they have paid in total.
 
-Why is this important:
+### Why is this important:
 
 • Feature Selection: It helps you identify "Red Flags." If a feature has a very low correlation with Churn (near 0), it might not be very useful for the model.
 
@@ -66,7 +66,7 @@ Why is this important:
 
 <img width="975" height="342" alt="image" src="https://github.com/user-attachments/assets/bc2ffb87-2a6e-4eaf-94e2-2c4834c69853" />
 
-The Left Graph: Raw Data Distribution
+## The Left Graph: Raw Data Distribution
 
 This represents the TotalCharges column exactly as it appears in the IBM dataset.
 
@@ -76,7 +76,7 @@ This represents the TotalCharges column exactly as it appears in the IBM dataset
 
 •	The Problem for AI: Many machine learning algorithms (especially Neural Networks and Logistic Regression) struggle with large, skewed numbers. If one feature is 8,000 and another (like "SeniorCitizen") is only 0 or 1, the model might mistakenly think the 8,000 is "more important" simply because the number is bigger.
 
-The Right Graph: Preprocessed Data
+## The Right Graph: Preprocessed Data
 
 •	This shows the data after it has passed through the StandardScaler in your code.
 
@@ -90,7 +90,7 @@ The Right Graph: Preprocessed Data
 
 •	Potential Column Shift: In many automated pipelines, the ColumnTransformer reorders columns. If the "Preprocessed" graph looks vastly different in shape (as it does here with two separate blocks), it often indicates that the visualization script is now looking at a different feature or that the scaling has "squashed" the outliers to highlight the difference between two main groups of customers.
 
-Why this "Transformation" is Necessary
+## Why this "Transformation" is Necessary
 
 You are comparing three very different types of models. This preprocessing step affects them differently:
 
@@ -100,11 +100,11 @@ You are comparing three very different types of models. This preprocessing step 
 
 •	For Random Forest: Interestingly, Random Forests don't actually care about scaling! They would work fine with the left graph. However, because we are doing a comparative study, we scale the data for all models to ensure a "fair fight."
 
-Architecture Description of the Deep Learning Model
+## Architecture Description of the Deep Learning Model
 
 The deep learning model used in this study is a fully connected Multilayer Perceptron (MLP) implemented using PyTorch and integrated with the scikit-learn ecosystem via the Skorch wrapper. After preprocessing, which includes numerical feature scaling and categorical feature one-hot encoding, each input sample is represented as a fixed-length numerical feature vector. The network consists of two hidden dense layers with ReLU activation functions to capture non-linear relationships in the data, followed by dropout layers to reduce overfitting. The first hidden layer contains a configurable number of neurons (50 or 100), while the second hidden layer reduces dimensionality by using half the number of neurons, enabling the model to learn compact feature representations. The output layer consists of a single neuron that produces a raw logit value, which is optimized using the Binary Cross-Entropy with Logits loss function. Class imbalance is explicitly handled by applying a positive class weight in the loss function, ensuring that churn instances contribute more significantly to the training process. The model is trained using the Adam optimizer with tuned learning rates and evaluated using F1 score and ROC-AUC metrics, making it well-suited for binary churn prediction tasks on structured tabular data.
 
-Model Type
+### Model Type
 
 •	Multilayer Perceptron (MLP)
 
@@ -112,7 +112,7 @@ Model Type
 
 •	Designed for binary classification (churn vs non-churn)
 
-Input Layer
+### Input Layer
 
 •	Receives preprocessed numerical vectors
 
@@ -120,7 +120,7 @@ Input Layer
 
 •	Represents customer attributes such as tenure, contract type, and services
 
-Hidden Layer 1
+### Hidden Layer 1
 
 •	Fully connected dense layer
 
@@ -129,7 +129,7 @@ Hidden Layer 1
 
 •	ReLU activation function introduces non-linearity
 
-Dropout Layer 1
+### Dropout Layer 1
 
 •	Dropout rate of 0.5
 
@@ -137,7 +137,7 @@ Dropout Layer 1
 
 •	Prevents overfitting on tabular data
 
-Hidden Layer 2
+### Hidden Layer 2
 
 •	Fully connected dense layer with half the neurons of the first layer
 
@@ -146,13 +146,13 @@ Hidden Layer 2
 •	ReLU activation for efficient gradient propagation
 
 
-Dropout Layer 2
+### Dropout Layer 2
 
 •	Additional regularization layer
 
 •	Improves generalization on unseen customer data
 
-Output Layer
+### Output Layer
 
 •	Single neuron
 
@@ -161,7 +161,7 @@ Output Layer
 
 •	Suitable for binary classification
 
-Loss Function
+### Loss Function
 
 •	Binary Cross-Entropy with Logits Loss (BCEWithLogitsLoss)
 
@@ -169,13 +169,13 @@ Loss Function
 
 •	Uses class weighting to address data imbalance
 
-Optimizer
+### Optimizer
 
 •	Adam optimizer
 
 •	Adaptive learning rates for stable and efficient training
 
-Training Strategy
+### Training Strategy
 
 •	Trained for 20–40 epochs
 
@@ -183,7 +183,7 @@ Training Strategy
 
 •	Hyperparameters tuned using GridSearchCV with F1 score optimization
 
-Comparative Model Performance
+## Comparative Model Performance
 
 <img width="975" height="430" alt="image" src="https://github.com/user-attachments/assets/b826a0d8-6932-49d2-9b73-a958ef36eeef" />
 
