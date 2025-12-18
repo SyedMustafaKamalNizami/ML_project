@@ -36,4 +36,33 @@ The added graph uses Kernel Density Estimation (KDE) to visualize how the data i
 
 <img width="1285" height="349" alt="image" src="https://github.com/user-attachments/assets/61626330-12c9-4974-879d-3e6a2ab00133" />
 
+Correlation Heatmap
+
+<img width="975" height="763" alt="image" src="https://github.com/user-attachments/assets/4ccf8405-e608-4b64-a8c6-2c443d845a45" />
+
+What is a Correlation Heatmap?
+
+A correlation heatmap uses the Pearson Correlation Coefficient ($r$) to measure the strength of a linear relationship between two variables. The values range from -1 to +1.
+
+•	+1.0: Perfect positive correlation (as one goes up, the other goes up).
+
+•	0.0: No linear relationship.
+
+•	-1.0: Perfect negative correlation (as one goes up, the other goes down).
+
+• Tenure vs. Churn (Negative Correlation): Usually around -0.35. This is one of the most important findings. It means as tenure (length of stay) increases, the likelihood of Churn decreases. Long-term customers are loyal.
+
+• Monthly Charges vs. Churn (Positive Correlation): Usually around +0.19. This shows that as the monthly bill increases, the probability of churn also increases. Customers paying more are more sensitive to the service value.
+
+• Total Charges vs. Tenure (High Positive Correlation): Usually around +0.83. This is expected (collinearity). The longer a customer stays, the more they have paid in total.
+
+Why is this important:
+
+• Feature Selection: It helps you identify "Red Flags." If a feature has a very low correlation with Churn (near 0), it might not be very useful for the model.
+
+• Multicollinearity: If two input features are too highly correlated (like tenure and TotalCharges), it can sometimes confuse linear models like Logistic Regression. This is why we use a StandardScaler to help normalize these relationships.
+
+
+
+
 
