@@ -100,6 +100,99 @@ You are comparing three very different types of models. This preprocessing step 
 
 •	For Random Forest: Interestingly, Random Forests don't actually care about scaling! They would work fine with the left graph. However, because we are doing a comparative study, we scale the data for all models to ensure a "fair fight."
 
+Architecture Description of the Deep Learning Model
+
+The deep learning model used in this study is a fully connected Multilayer Perceptron (MLP) implemented using PyTorch and integrated with the scikit-learn ecosystem via the Skorch wrapper. After preprocessing, which includes numerical feature scaling and categorical feature one-hot encoding, each input sample is represented as a fixed-length numerical feature vector. The network consists of two hidden dense layers with ReLU activation functions to capture non-linear relationships in the data, followed by dropout layers to reduce overfitting. The first hidden layer contains a configurable number of neurons (50 or 100), while the second hidden layer reduces dimensionality by using half the number of neurons, enabling the model to learn compact feature representations. The output layer consists of a single neuron that produces a raw logit value, which is optimized using the Binary Cross-Entropy with Logits loss function. Class imbalance is explicitly handled by applying a positive class weight in the loss function, ensuring that churn instances contribute more significantly to the training process. The model is trained using the Adam optimizer with tuned learning rates and evaluated using F1 score and ROC-AUC metrics, making it well-suited for binary churn prediction tasks on structured tabular data.
+
+Model Type
+
+•	Multilayer Perceptron (MLP)
+•	Feed-forward, fully connected neural network
+•	Designed for binary classification (churn vs non-churn)
+
+Input Layer
+
+•	Receives preprocessed numerical vectors
+•	Input size is dynamically determined after one-hot encoding and scaling
+•	Represents customer attributes such as tenure, contract type, and services
+
+Hidden Layer 1
+
+•	Fully connected dense layer
+•	50 or 100 neurons (hyperparameter tuned via GridSearch)
+•	ReLU activation function introduces non-linearity
+
+Dropout Layer 1
+
+•	Dropout rate of 0.5
+•	Randomly deactivates neurons during training
+•	Prevents overfitting on tabular data
+
+Hidden Layer 2
+
+•	Fully connected dense layer with half the neurons of the first layer
+•	Encourages dimensionality reduction and feature abstraction
+•	ReLU activation for efficient gradient propagation
+
+
+Dropout Layer 2
+
+•	Additional regularization layer
+•	Improves generalization on unseen customer data
+
+Output Layer
+
+•	Single neuron
+•	Produces a raw logit value (not a probability)
+•	Suitable for binary classification
+
+Loss Function
+
+•	Binary Cross-Entropy with Logits Loss (BCEWithLogitsLoss)
+•	Combines sigmoid activation and loss computation
+•	Uses class weighting to address data imbalance
+
+Optimizer
+
+•	Adam optimizer
+•	Adaptive learning rates for stable and efficient training
+
+Training Strategy
+
+•	Trained for 20–40 epochs
+•	Integrated into a scikit-learn pipeline using Skorch
+•	Hyperparameters tuned using GridSearchCV with F1 score optimization
+
+Comparative Model Performance
+
+<img width="975" height="430" alt="image" src="https://github.com/user-attachments/assets/b826a0d8-6932-49d2-9b73-a958ef36eeef" />
+
+
+1. Performance Summary Table
+
+<img width="538" height="228" alt="image" src="https://github.com/user-attachments/assets/229946d0-75c7-4d0d-90af-e5cf510c1f6b" />
+
+2. Analysis of the Metrics
+
+•	Accuracy (The Winner: Random Forest): 
+
+•	Random Forest is the clear leader here at 76.7%.
+
+• Accuracy tells us the overall percentage of correct predictions. However, in churn datasets (where "No Churn" is more common), accuracy can be "inflated" by simply guessing "No Churn" every time.
+
+•	F1 Score (The Winner: Random Forest): 
+
+•	ROC AUC (The Winner: Logistic Regression): * All three models are extremely close, performing around 0.83.
+
+•	ROC AUC measures the model's ability to distinguish between a "Churn" and "No Churn" customer. An 0.83 score is considered excellent, indicating all three models have strong discriminatory power.
+
+While the Deep Learning MLP and Logistic Regression are very competitive in terms of ROC AUC, the Random Forest is the best overall performer for this specific dataset. It provides the highest Accuracy and, more importantly, the highest F1 Score, making it the most reliable model for identifying which customers are likely to leave.It is a common misconception that Neural Networks (NNs) are always "the best" choice. While they are state-of-the-art for tasks like image recognition or language translation, your results show a classic scenario where a Random Forest wins.
+
+
+
+
+
+
 
 
 
