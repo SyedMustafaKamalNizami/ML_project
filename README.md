@@ -34,5 +34,6 @@ The added graph uses Kernel Density Estimation (KDE) to visualize how the data i
 
 •	Bimodal Nature: The Total Charges curve for "No Churn" often shows two peaks, indicating the model is seeing two distinct types of loyal customers (low-spending and high-spending).
 
+<img width="1285" height="349" alt="image" src="https://github.com/user-attachments/assets/61626330-12c9-4974-879d-3e6a2ab00133" />
 
 
