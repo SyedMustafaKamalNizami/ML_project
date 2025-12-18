@@ -185,13 +185,15 @@ The deep learning model used in this study is a fully connected Multilayer Perce
 
 ## Comparative Model Performance
 
-<img width="531" height="229" alt="image" src="https://github.com/user-attachments/assets/d1d486c2-ed0a-4cb1-b5ed-b37ba4b63d1b" />
+<img width="975" height="430" alt="image" src="https://github.com/user-attachments/assets/68b7553a-7ed5-426c-9da1-164ab01f7f8f" />
+
 
 
 
 1. Performance Summary Table
 
-<img width="538" height="228" alt="image" src="https://github.com/user-attachments/assets/229946d0-75c7-4d0d-90af-e5cf510c1f6b" />
+<img width="531" height="229" alt="image" src="https://github.com/user-attachments/assets/0a2e6737-4443-40d5-8561-eac2f77e0045" />
+
 
 2. Analysis of the Metrics
 
