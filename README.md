@@ -107,60 +107,80 @@ The deep learning model used in this study is a fully connected Multilayer Perce
 Model Type
 
 •	Multilayer Perceptron (MLP)
+
 •	Feed-forward, fully connected neural network
+
 •	Designed for binary classification (churn vs non-churn)
 
 Input Layer
 
 •	Receives preprocessed numerical vectors
+
 •	Input size is dynamically determined after one-hot encoding and scaling
+
 •	Represents customer attributes such as tenure, contract type, and services
 
 Hidden Layer 1
 
 •	Fully connected dense layer
+
+
 •	50 or 100 neurons (hyperparameter tuned via GridSearch)
+
 •	ReLU activation function introduces non-linearity
 
 Dropout Layer 1
 
 •	Dropout rate of 0.5
+
 •	Randomly deactivates neurons during training
+
 •	Prevents overfitting on tabular data
 
 Hidden Layer 2
 
 •	Fully connected dense layer with half the neurons of the first layer
+
 •	Encourages dimensionality reduction and feature abstraction
+
 •	ReLU activation for efficient gradient propagation
 
 
 Dropout Layer 2
 
 •	Additional regularization layer
+
 •	Improves generalization on unseen customer data
 
 Output Layer
 
 •	Single neuron
+
 •	Produces a raw logit value (not a probability)
+
+
 •	Suitable for binary classification
 
 Loss Function
 
 •	Binary Cross-Entropy with Logits Loss (BCEWithLogitsLoss)
+
 •	Combines sigmoid activation and loss computation
+
 •	Uses class weighting to address data imbalance
 
 Optimizer
 
 •	Adam optimizer
+
 •	Adaptive learning rates for stable and efficient training
 
 Training Strategy
 
 •	Trained for 20–40 epochs
+
 •	Integrated into a scikit-learn pipeline using Skorch
+
 •	Hyperparameters tuned using GridSearchCV with F1 score optimization
 
 Comparative Model Performance
